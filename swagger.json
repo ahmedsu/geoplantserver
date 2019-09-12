@@ -1,0 +1,553 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "GeoPlant - Backend",
+    "description": "GeoPlant Backend API Documentation",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "192.168.43.87:3003",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "403": {
+            "description": "User already exist!"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with given ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users/signIn": {
+      "parameters": [
+        {
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "User email",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "in": "path",
+          "required": true,
+          "description": "User password",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "403": {
+            "description": "Password is incorrect!"
+          }
+        }
+      }
+    },
+    "/plants": {
+      "post": {
+        "tags": [
+          "Plants"
+        ],
+        "description": "Create new plant in database",
+        "parameters": [
+          {
+            "name": "plant_create",
+            "in": "body",
+            "description": "Plant that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Plant"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New plant is created",
+            "schema": {
+              "$ref": "#/definitions/Plant"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Plants"
+        ],
+        "summary": "Get all plants in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Plants"
+            }
+          }
+        }
+      }
+    },
+    "/plant/{plantId}": {
+      "parameters": [
+        {
+          "name": "plantId",
+          "in": "path",
+          "required": true,
+          "description": "ID of plant that we want to find",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Plants"
+        ],
+        "summary": "Get plant with given ID",
+        "responses": {
+          "200": {
+            "description": "Plant is found",
+            "schema": {
+              "$ref": "#/definitions/Plant"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update plant with given ID",
+        "tags": [
+          "Plants"
+        ],
+        "parameters": [
+          {
+            "name": "plantId",
+            "in": "body",
+            "description": "Plant with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Plant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plant is updated",
+            "schema": {
+              "$ref": "#/definitions/Plant"
+            }
+          }
+        }
+      }
+    },
+    "/bugs": {
+      "post": {
+        "tags": [
+          "Bugs"
+        ],
+        "description": "Kreira novi unos za bug",
+        "parameters": [
+          {
+            "name": "insert",
+            "in": "body",
+            "description": "Bug objekat za unos",
+            "schema": {
+              "$ref": "#/definitions/Bug"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New bug is created",
+            "schema": {
+              "$ref": "#/definitions/Bug"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Bugs"
+        ],
+        "summary": "Vrati sve bugove iz baze",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Bugs"
+            }
+          }
+        }
+      }
+    },
+    "/bugs/user/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID korisnika za kojeg se traži lista bugova",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Bugs"
+        ],
+        "summary": "Vraća bugove za korisnika",
+        "responses": {
+          "200": {
+            "description": "Bug list is found",
+            "schema": {
+              "$ref": "#/definitions/Bugs"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update bug with given ID",
+        "tags": [
+          "Bugs"
+        ],
+        "parameters": [
+          {
+            "name": "bug",
+            "in": "body",
+            "description": "Bug with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Bug"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bug is updated",
+            "schema": {
+              "$ref": "#/definitions/Bug"
+            }
+          }
+        }
+      }
+    },
+    "/plantfamilies": {
+      "post": {
+        "tags": [
+          "Families"
+        ],
+        "description": "Kreira novi unos za porodicu",
+        "parameters": [
+          {
+            "name": "insert",
+            "in": "body",
+            "description": "Family objekat za unos",
+            "schema": {
+              "$ref": "#/definitions/Family"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New family is created",
+            "schema": {
+              "$ref": "#/definitions/Family"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Families"
+        ],
+        "summary": "Vrati sve porodice iz baze",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Families"
+            }
+          }
+        }
+      }
+    },
+    "/plantfamilies/plants/{familyId}": {
+      "parameters": [
+        {
+          "name": "familyId",
+          "in": "path",
+          "required": true,
+          "description": "ID porodice za kojeg se traži lista biljki",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Families"
+        ],
+        "summary": "Vraća biljke za traženu porodicu",
+        "responses": {
+          "200": {
+            "description": "Plant list is found",
+            "schema": {
+              "$ref": "#/definitions/Plants"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "dob",
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "location": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/User"
+      }
+    },
+    "Plant": {
+      "required": [
+        "name",
+        "latName",
+        "family",
+        "geoLat",
+        "geoLon",
+        "solved"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "latName": {
+          "type": "string"
+        },
+        "family": {
+          "type": "integer"
+        },
+        "kingdom": {
+          "type": "string"
+        },
+        "plantOrder": {
+          "type": "string"
+        },
+        "about": {
+          "type": "string"
+        },
+        "geoLat": {
+          "type": "string"
+        },
+        "geoLon": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "solved": {
+          "type": "string"
+        },
+        "type": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Plants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Plant"
+      }
+    },
+    "Bug": {
+      "required": [
+        "userid",
+        "problem",
+        "timestamp"
+      ],
+      "properties": {
+        "userid": {
+          "type": "integer"
+        },
+        "problem": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "Bugs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Bug"
+      }
+    },
+    "Family": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      }
+    },
+    "Families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Family"
+      }
+    }
+  }
+}
